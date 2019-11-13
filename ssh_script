@@ -1,0 +1,15 @@
+#! /bin/bash
+arr=(server client stack)
+user=(root@192.168.1.68 root@192.168.1.68 any@192.168.1.240)
+pass=(rootpass rootpass teL%1234)
+dir=("/home/DIAMETER_STUB/DIAMETER_STUB/JAVA_latest/JAVA_S6/serverSCTP/serverHSS1" "/home/DIAMETER_STUB/DIAMETER_STUB/JAVA_latest/JAVA_S6/clientSCTP/clientMME10")
+k=0
+complete -W "`ls ~/Downloads/Pcaps`" logmein
+for i in "${arr[@]}"
+do
+	if [ "$1" == $i ]; then
+		echo "Logging in $i"
+		sshpass -p ${pass[k]} ssh -t ${user[k]} "cd ${dir[k]}; bash";
+	fi	
+	k=$((k + 1))
+done
